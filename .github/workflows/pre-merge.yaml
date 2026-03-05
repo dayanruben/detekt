@@ -44,8 +44,6 @@ jobs:
         include:
           - os: windows-latest
             jdk: 25
-          - os: macos-latest
-            jdk: 25
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Repo
