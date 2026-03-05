@@ -48,13 +48,14 @@ listOf(configurations.testFixturesApiElements, configurations.testFixturesRuntim
     }
 }
 
-kotlin {
-    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
-    abiValidation {
-        filters {
-            exclude {
-                byNames.add("dev.detekt.api.internal.**")
-            }
-        }
-    }
-}
+// Temporarily disabled for Kotlin EAP compatibility
+// kotlin {
+//     @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+//     abiValidation {
+//         filters {
+//             excluded {
+//                 byNames.add("dev.detekt.api.internal.**")
+//             }
+//         }
+//     }
+// }
