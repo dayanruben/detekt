@@ -15,3 +15,5 @@ local.properties
 
 *.jar
 !gradle-wrapper.jar
+
+.junie
