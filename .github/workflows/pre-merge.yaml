@@ -16,6 +16,7 @@ permissions:
 
 jobs:
   build-health:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -36,6 +37,7 @@ jobs:
         run: ./gradlew buildHealth :detekt-gradle-plugin:buildHealth
 
   gradle:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     strategy:
       fail-fast: false
       matrix:
@@ -73,6 +75,7 @@ jobs:
           if-no-files-found: ignore
 
   verify-generated-config-file:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -93,6 +96,7 @@ jobs:
         run: ./gradlew verifyGeneratorOutput
 
   compile-test-snippets:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -113,6 +117,7 @@ jobs:
         run: ./gradlew test -Pcompile-test-snippets=true
 
   warnings-as-errors:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -133,6 +138,7 @@ jobs:
         run: ./gradlew compileKotlin compileTestKotlin compileTestFixturesKotlin -PwarningsAsErrors=true
 
   build-detekt-sample-extensions:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -142,3 +148,19 @@ jobs:
       - name: Build sample extensions
         run: ./gradlew build
         working-directory: detekt-sample-extensions
+
+  eap-smoke:
+    if: ${{ github.ref == 'refs/heads/eap/kotlin' || github.head_ref == 'eap/kotlin' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Setup Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
+        with:
+          java-version: 25
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
+      - name: smoke
+        run: ./gradlew help
