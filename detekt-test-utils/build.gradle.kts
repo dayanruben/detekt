@@ -14,13 +14,4 @@ dependencies {
     testImplementation(libs.assertj.core)
 }
 
-kotlin {
-    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
-    abiValidation {
-        filters {
-            excluded {
-                byNames.add("dev.detekt.test.utils.internal.**")
-            }
-        }
-    }
-}
+
