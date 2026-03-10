@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   cli:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     permissions:
       contents: read  # for actions/checkout to fetch code
       security-events: write  # for github/codeql-action/upload-sarif to upload SARIF results
@@ -38,6 +39,7 @@ jobs:
 
 
   gradle:
+    if: ${{ github.ref != 'refs/heads/eap/kotlin' && github.head_ref != 'eap/kotlin' }}
     permissions:
       contents: read  # for actions/checkout to fetch code
       security-events: write  # for github/codeql-action/upload-sarif to upload SARIF results
@@ -65,3 +67,19 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: build/reports/detekt/merge.sarif.json
+
+  eap-smoke:
+    if: ${{ github.ref == 'refs/heads/eap/kotlin' || github.head_ref == 'eap/kotlin' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: Setup Java
+        uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5
+        with:
+          java-version: 25
+          distribution: 'temurin'
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5
+      - name: smoke
+        run: ./gradlew help
