@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   dependency-submission:
+    if: github.repository == 'detekt/detekt'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
