@@ -43,6 +43,7 @@ dependencies {
     generatedDeprecations(projects.detektRulesPerformance) { targetConfiguration = "generatedDeprecations" }
     generatedDeprecations(projects.detektRulesPotentialBugs) { targetConfiguration = "generatedDeprecations" }
     generatedDeprecations(projects.detektRulesRuleauthors) { targetConfiguration = "generatedDeprecations" }
+    generatedDeprecations(projects.detektRulesStandardLibrary) { targetConfiguration = "generatedDeprecations" }
     generatedDeprecations(projects.detektRulesStyle) { targetConfiguration = "generatedDeprecations" }
 
     testRuntimeOnly(projects.detektRules)
