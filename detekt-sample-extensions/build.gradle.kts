@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.4.20-RC"
+    kotlin("jvm") version "2.4.20-RC2"
 }
 
 dependencies {
