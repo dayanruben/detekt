@@ -147,6 +147,8 @@ coroutines:
       - 'IO'
       - 'Default'
       - 'Unconfined'
+  MissingStackTraceRecoverable:
+    active: false
   RedundantSuspendModifier:
     active: true
   SleepInsteadOfDelay:
@@ -401,6 +403,9 @@ potential-bugs:
     active: true
   EqualsWithHashCodeExist:
     active: true
+  EqualsWithHashCodeUseSameFields:
+    active: false
+    allowHashCodeSubset: false
   ExitOutsideMain:
     active: false
   ExplicitGarbageCollectionCall:
@@ -690,6 +695,9 @@ style:
   ForbiddenOptIn:
     active: false
     markerClasses: []
+  ForbiddenSuperclass:
+    active: false
+    parentClasses: []
   ForbiddenSuppress:
     active: false
     rules: []
