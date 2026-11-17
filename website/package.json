@@ -47,6 +47,7 @@
   },
   "resolutions": {
     "serialize-javascript": "^7.0.3",
-    "webpack-dev-server": "^6.0.0"
+    "webpack-dev-server": "^6.0.0",
+    "tinypool": "2.1.2"
   }
 }
